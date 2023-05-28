@@ -11,11 +11,21 @@ public:
     CPClickableLabel(QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
     virtual ~CPClickableLabel();
 
+    QImage getImage();
+
 signals:
     void clicked();
+    void selectedFile(QString file);
+
+private:
+    void selectFile();
+    QImage resizeQImage(const QImage& image, QSize size);
 
 protected:
     void mousePressEvent(QMouseEvent* event);
+
+private:
+    QImage image;
 };
 
 #endif // CPCLICKABLELABEL_H
