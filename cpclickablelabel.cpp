@@ -4,11 +4,9 @@
 #include <QFileDialog>
 #include <QDebug>
 
-CPClickableLabel::CPClickableLabel(QWidget* parent, Qt::WindowFlags f) : QLabel(parent, f) {
+CPClickableLabel::CPClickableLabel(QWidget* parent, Qt::WindowFlags f) : QLabel(parent, f), selectImage(false), image(NULL) {
 
 }
-
-
 
 CPClickableLabel::~CPClickableLabel() {
 
@@ -17,9 +15,16 @@ CPClickableLabel::~CPClickableLabel() {
 void CPClickableLabel::mousePressEvent(QMouseEvent* event) {
     Q_UNUSED(event);
     if (event->button() == Qt::LeftButton) {
-        //emit clicked();
-        selectFile();
+        if (selectImage) {
+            selectFile();
+        } else {
+            emit clicked();
+        }
     }
+}
+
+void CPClickableLabel::setSelectImage(bool selectImage) {
+    this->selectImage = selectImage;
 }
 
 void CPClickableLabel::selectFile() {
@@ -58,5 +63,9 @@ QImage CPClickableLabel::resizeQImage(const QImage& image, QSize size) {
 
 QImage CPClickableLabel::getImage() {
     return image;
+}
+
+void CPClickableLabel::setImage(const QImage& image) {
+    this->image = image;
 }
 

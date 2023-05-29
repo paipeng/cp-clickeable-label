@@ -12,6 +12,8 @@ public:
     virtual ~CPClickableLabel();
 
     QImage getImage();
+    void setImage(const QImage& image);
+    void setSelectImage(bool selectImage);
 
 signals:
     void clicked();
@@ -25,6 +27,7 @@ protected:
     void mousePressEvent(QMouseEvent* event);
 
 private:
+    bool selectImage;
     QImage image;
 };
 
